@@ -13,7 +13,7 @@ Version:             0.1
 Synopsis:            Simple thread barriers
 
 -- A longer description of the package.
--- Description:         
+Description: A very simple package providing thread barriers.
 
 -- URL for the project homepage or repository.
 Homepage:            https://github.com/jsgf/concurrent-barrier
@@ -45,15 +45,14 @@ Build-type:          Simple
 -- Constraint on the version of Cabal needed to build this package.
 Cabal-version:       >=1.2
 
-
 Library
   -- Modules exported by the library.
   Exposed-modules:     Control.Concurrent.Barrier
-  ghc-options:      -Wall -O2
+  ghc-options:      -Wall
   
   -- Packages needed in order to build this package.
   Build-depends:       
-      base
+      base >= 3 && < 5
  
   -- Modules not exported by this package.
   -- Other-modules:       
