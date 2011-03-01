@@ -16,7 +16,7 @@ Synopsis:            Simple thread barriers
 -- Description:         
 
 -- URL for the project homepage or repository.
-Homepage:            http://github.com/jsgf/concurrent-barrier
+Homepage:            https://github.com/jsgf/concurrent-barrier
 
 -- The license under which the package is released.
 License:             BSD3
