@@ -4,21 +4,20 @@ module Control.Concurrent.Barrier
     , latchBarrier
     ) where
 
-import Control.Monad(forM_)
-import Control.Concurrent(threadDelay, forkIO)
+import Control.Monad (forM_)
 import Control.Concurrent.MVar
 
 barrier' :: (Int -> Int) -> Int -> IO (IO ())
 barrier' reset count = do
   b <- newMVar (count, [])
   return $ do
-    w <- modifyMVar b $ \(c, waiting) -> do
-           if c <= 1 then do
-             forM_ waiting $ flip putMVar ()
-             return ((reset count, []), Nothing)
-           else do
-             w <- newEmptyMVar
-             return ((c-1, w:waiting), Just w)
+    w <- modifyMVar b $ \(c, waiting) ->
+           case c of
+             0 -> return ((0, []), Nothing)
+             1 -> do forM_ waiting $ flip putMVar ()
+                     return ((reset count, []), Nothing)
+             _ -> do w <- newEmptyMVar
+                     return ((c-1, w:waiting), Just w)
 
     maybe (return ()) takeMVar w
 
