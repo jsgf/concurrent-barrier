@@ -1,13 +1,17 @@
 {-# LANGUAGE DoAndIfThenElse #-}
 module Control.Concurrent.Barrier
-    ( barrier
+    ( Barrier
+
+    , barrier
     , latchBarrier
     ) where
 
 import Control.Monad (forM_)
 import Control.Concurrent.MVar
 
-barrier' :: (Int -> Int) -> Int -> IO (IO ())
+type Barrier = IO ()
+
+barrier' :: (Int -> Int) -> Int -> IO Barrier
 barrier' reset count = do
   b <- newMVar (count, [])
   return $ do
@@ -31,7 +35,7 @@ barrier' reset count = do
 -- >    forkIO $ b >> putStrLn "2"  -- blocked
 -- >    forkIO $ b >> putStrLn "3"  -- all three threads run
 barrier :: Int -- ^ count - number of threads required before barrier is opened
-        -> IO (IO ())
+        -> IO Barrier
 barrier = barrier' id
 
 -- | Latching barrier.  This is the same as 'barrier', except once the
@@ -39,5 +43,5 @@ barrier = barrier' id
 -- it), it remains open, allowing all subsequent threads through
 -- unblocked.
 latchBarrier :: Int -- ^ count - number of threads required before barrier is opened
-             -> IO (IO ())
+             -> IO Barrier
 latchBarrier = barrier' (const 0)
