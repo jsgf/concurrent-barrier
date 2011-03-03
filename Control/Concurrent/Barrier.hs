@@ -37,6 +37,7 @@ barrier' reset count = do
 barrier :: Int -- ^ count - number of threads required before barrier is opened
         -> IO Barrier
 barrier = barrier' id
+{-# INLINE barrier #-}
 
 -- | Latching barrier.  This is the same as 'barrier', except once the
 -- barrier has opened (the requisite number of threads has reached
@@ -45,3 +46,4 @@ barrier = barrier' id
 latchBarrier :: Int -- ^ count - number of threads required before barrier is opened
              -> IO Barrier
 latchBarrier = barrier' (const 0)
+{-# INLINE latchBarrier #-}
