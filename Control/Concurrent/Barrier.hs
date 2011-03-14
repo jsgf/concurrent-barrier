@@ -1,4 +1,3 @@
-{-# LANGUAGE DoAndIfThenElse #-}
 module Control.Concurrent.Barrier
     ( Barrier
 
