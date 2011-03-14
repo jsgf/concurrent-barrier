@@ -3,7 +3,7 @@
 -- http://www.haskell.org/cabal/release/cabal-latest/doc/users-guide/authors.html#pkg-descr.
 -- The name of the package.
 Name:                concurrent-barrier
-Version:             0.1.1
+Version:             0.1.2
 Synopsis:            Simple thread barriers
 Description:
 	A very simple package providing thread barriers.
